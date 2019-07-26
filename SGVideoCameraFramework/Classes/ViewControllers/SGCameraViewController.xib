@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SGCameraViewController" customModule="SGVideoCameraFramework" customModuleProvider="target">
+            <connections>
+                <outlet property="cameraButton" destination="klT-R7-CfI" id="myE-89-E0A"/>
+                <outlet property="cameraView" destination="ywl-n1-vNO" id="b4R-JV-Euy"/>
+                <outlet property="timerLabel" destination="8o2-Bl-rcn" id="JqA-d6-8Vd"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ywl-n1-vNO" customClass="SGCameraView" customModule="SGVideoCameraFramework">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klT-R7-CfI">
+                            <rect key="frame" x="177" y="796" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="Tah-qn-OPY"/>
+                                <constraint firstAttribute="height" constant="60" id="ok3-kB-WDO"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="gnr_cameraButtonIcon"/>
+                            <connections>
+                                <action selector="cameraButtonTapped:" destination="-1" eventType="touchUpInside" id="zlA-qJ-Ar3"/>
+                            </connections>
+                        </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8o2-Bl-rcn">
+                            <rect key="frame" x="186" y="760" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH7-kT-lhH">
+                            <rect key="frame" x="24" y="48" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="fLJ-Y7-sca"/>
+                                <constraint firstAttribute="height" constant="30" id="mIU-Eh-cV1"/>
+                            </constraints>
+                            <state key="normal" image="grn_closeCrossWhite"/>
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="pt7-qe-GM1"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="klT-R7-CfI" firstAttribute="top" secondItem="8o2-Bl-rcn" secondAttribute="bottom" constant="15" id="Kxv-4t-6ae"/>
+                        <constraint firstAttribute="bottom" secondItem="klT-R7-CfI" secondAttribute="bottom" constant="40" id="Nip-tj-5cU"/>
+                        <constraint firstItem="QH7-kT-lhH" firstAttribute="top" secondItem="ywl-n1-vNO" secondAttribute="top" constant="48" id="TRl-hn-neo"/>
+                        <constraint firstItem="klT-R7-CfI" firstAttribute="centerX" secondItem="ywl-n1-vNO" secondAttribute="centerX" id="UVu-aA-NvP"/>
+                        <constraint firstItem="QH7-kT-lhH" firstAttribute="leading" secondItem="ywl-n1-vNO" secondAttribute="leading" constant="24" id="YjC-j1-V4K"/>
+                        <constraint firstItem="8o2-Bl-rcn" firstAttribute="centerX" secondItem="ywl-n1-vNO" secondAttribute="centerX" id="zZd-4c-gJq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ywl-n1-vNO" secondAttribute="trailing" id="6ee-WO-sAj"/>
+                <constraint firstItem="ywl-n1-vNO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8m5-sO-TRv"/>
+                <constraint firstAttribute="bottom" secondItem="ywl-n1-vNO" secondAttribute="bottom" id="Hxv-3t-p2b"/>
+                <constraint firstItem="ywl-n1-vNO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hAM-VP-84X"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="gnr_cameraButtonIcon" width="135" height="135"/>
+        <image name="grn_closeCrossWhite" width="15" height="15"/>
+    </resources>
+</document>
