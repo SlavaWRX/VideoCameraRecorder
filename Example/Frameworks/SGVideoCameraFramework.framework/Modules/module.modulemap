@@ -1,0 +1,11 @@
+framework module SGVideoCameraFramework {
+  umbrella header "SGVideoCameraFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module SGVideoCameraFramework.Swift {
+    header "SGVideoCameraFramework-Swift.h"
+    requires objc
+}
