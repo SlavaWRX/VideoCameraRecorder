@@ -25,13 +25,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Please</string>
+	<string>Please allow camera view to use your camera</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Please mic</string>
+	<string>Please allow camera to use your microphone</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Our application needs permission to write videos...</string>
+	<string>Camera view needs permission to write videos on your library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please</string>
+	<string>Please allow camera to read file from your library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
