@@ -8,13 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		F950BA2822E9E03300B81162 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F950BA2722E9E03300B81162 /* AppDelegate.swift */; };
-		F950BA2A22E9E03300B81162 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F950BA2922E9E03300B81162 /* ViewController.swift */; };
+		F950BA2A22E9E03300B81162 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F950BA2922E9E03300B81162 /* CameraViewController.swift */; };
 		F950BA2D22E9E03300B81162 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F950BA2B22E9E03300B81162 /* Main.storyboard */; };
 		F950BA2F22E9E03600B81162 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F950BA2E22E9E03600B81162 /* Assets.xcassets */; };
 		F950BA3222E9E03600B81162 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F950BA3022E9E03600B81162 /* LaunchScreen.storyboard */; };
-		F9F0FADF22EF39D900557B95 /* SGVideoCameraFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F0FADE22EF39D900557B95 /* SGVideoCameraFramework.framework */; };
-		F9F0FAE022EF39D900557B95 /* SGVideoCameraFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9F0FADE22EF39D900557B95 /* SGVideoCameraFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F98FC0B822EF7D27000C5FF5 /* SGVideoCameraFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F98FC0B722EF7CBD000C5FF5 /* SGVideoCameraFramework.framework */; };
+		F98FC0B922EF7D27000C5FF5 /* SGVideoCameraFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F98FC0B722EF7CBD000C5FF5 /* SGVideoCameraFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F98FC0B622EF7CBD000C5FF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F98FC0B222EF7CBD000C5FF5 /* SGVideoCameraFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F916923822EACAB900FE2D45;
+			remoteInfo = SGVideoCameraFramework;
+		};
+		F98FC0BA22EF7D27000C5FF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F98FC0B222EF7CBD000C5FF5 /* SGVideoCameraFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F916923722EACAB900FE2D45;
+			remoteInfo = SGVideoCameraFramework;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		F950BA3C22E9E0AB00B81162 /* Embed Frameworks */ = {
@@ -23,7 +40,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F9F0FAE022EF39D900557B95 /* SGVideoCameraFramework.framework in Embed Frameworks */,
+				F98FC0B922EF7D27000C5FF5 /* SGVideoCameraFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -33,12 +50,12 @@
 /* Begin PBXFileReference section */
 		F950BA2422E9E03300B81162 /* CameraFrameworkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraFrameworkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F950BA2722E9E03300B81162 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F950BA2922E9E03300B81162 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F950BA2922E9E03300B81162 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		F950BA2C22E9E03300B81162 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F950BA2E22E9E03600B81162 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F950BA3122E9E03600B81162 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F950BA3322E9E03600B81162 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F9F0FADE22EF39D900557B95 /* SGVideoCameraFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SGVideoCameraFramework.framework; path = Frameworks/SGVideoCameraFramework.framework; sourceTree = "<group>"; };
+		F98FC0B222EF7CBD000C5FF5 /* SGVideoCameraFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SGVideoCameraFramework.xcodeproj; path = ../SGVideoCameraFramework.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9F0FADF22EF39D900557B95 /* SGVideoCameraFramework.framework in Frameworks */,
+				F98FC0B822EF7D27000C5FF5 /* SGVideoCameraFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +73,7 @@
 		F950BA1B22E9E03300B81162 = {
 			isa = PBXGroup;
 			children = (
-				F9F0FADE22EF39D900557B95 /* SGVideoCameraFramework.framework */,
+				F98FC0B222EF7CBD000C5FF5 /* SGVideoCameraFramework.xcodeproj */,
 				F950BA2622E9E03300B81162 /* CameraFrameworkTest */,
 				F950BA2522E9E03300B81162 /* Products */,
 			);
@@ -74,13 +91,21 @@
 			isa = PBXGroup;
 			children = (
 				F950BA2722E9E03300B81162 /* AppDelegate.swift */,
-				F950BA2922E9E03300B81162 /* ViewController.swift */,
+				F950BA2922E9E03300B81162 /* CameraViewController.swift */,
 				F950BA2B22E9E03300B81162 /* Main.storyboard */,
 				F950BA2E22E9E03600B81162 /* Assets.xcassets */,
 				F950BA3022E9E03600B81162 /* LaunchScreen.storyboard */,
 				F950BA3322E9E03600B81162 /* Info.plist */,
 			);
 			path = CameraFrameworkTest;
+			sourceTree = "<group>";
+		};
+		F98FC0B322EF7CBD000C5FF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F98FC0B722EF7CBD000C5FF5 /* SGVideoCameraFramework.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,6 +123,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F98FC0BB22EF7D27000C5FF5 /* PBXTargetDependency */,
 			);
 			name = CameraFrameworkTest;
 			productName = CameraFrameworkTest;
@@ -130,12 +156,28 @@
 			mainGroup = F950BA1B22E9E03300B81162;
 			productRefGroup = F950BA2522E9E03300B81162 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F98FC0B322EF7CBD000C5FF5 /* Products */;
+					ProjectRef = F98FC0B222EF7CBD000C5FF5 /* SGVideoCameraFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F950BA2322E9E03300B81162 /* CameraFrameworkTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F98FC0B722EF7CBD000C5FF5 /* SGVideoCameraFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SGVideoCameraFramework.framework;
+			remoteRef = F98FC0B622EF7CBD000C5FF5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F950BA2222E9E03300B81162 /* Resources */ = {
@@ -155,12 +197,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F950BA2A22E9E03300B81162 /* ViewController.swift in Sources */,
+				F950BA2A22E9E03300B81162 /* CameraViewController.swift in Sources */,
 				F950BA2822E9E03300B81162 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F98FC0BB22EF7D27000C5FF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SGVideoCameraFramework;
+			targetProxy = F98FC0BA22EF7D27000C5FF5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F950BA2B22E9E03300B81162 /* Main.storyboard */ = {
@@ -301,6 +351,7 @@
 		F950BA3722E9E03600B81162 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CX72D5RZN;
@@ -324,6 +375,7 @@
 		F950BA3822E9E03600B81162 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CX72D5RZN;

@@ -110,23 +110,14 @@ public class SGCameraViewController: UIViewController {
         }
     }
     
-    private func shareVideo(_ assetId: [String], shareUrl: URL) {
+    private func shareVideo(shareUrl: URL) {
         let videoLink = NSURL(fileURLWithPath: shareUrl.absoluteString)
         let objectsToShare = [videoLink]
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
         activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-            PHPhotoLibrary.shared().performChanges( {
-                let imageAssetToDelete = PHAsset.fetchAssets(withLocalIdentifiers: assetId, options: nil)
-                PHAssetChangeRequest.deleteAssets(imageAssetToDelete)
-                print(imageAssetToDelete)
-            }, completionHandler: { success, error in
-                if success {
-                    print("success")
-                } else {
-                    print("error")
-                }
-            })
+            let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
+            self.cameraView.cameraMan.deleteFileAt(exportPath)
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -134,7 +125,7 @@ public class SGCameraViewController: UIViewController {
 }
 
 extension SGCameraViewController: SGCameraViewDelegate {
-    func shareVideo(_ url: URL, assetId: String) {
-        shareVideo([assetId], shareUrl: url)
+    func sGCameraViewDidShare(_ url: URL) {
+        shareVideo(shareUrl: url)
     }
 }

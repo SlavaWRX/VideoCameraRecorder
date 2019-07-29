@@ -10,12 +10,12 @@ import Foundation
 import Photos
 
 protocol SGCameraViewDelegate: class {
-    func shareVideo(_ url: URL, assetId: String)
+    func sGCameraViewDidShare(_ videoUrl: URL)
 }
 
 public class SGCameraView: UIView, SGCameraManDelegate {
     
-    let cameraMan = SGCameraMan()
+    public let cameraMan = SGCameraManual()
     
     var previewLayer: AVCaptureVideoPreviewLayer?
     weak var delegate: SGCameraViewDelegate?
@@ -73,22 +73,24 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     // MARK: - Private helpers
     
     func showNoCamera(_ show: Bool) {
+        // error if user did not give permission for camera
     }
     
     
     // CameraManDelegate
-    func cameraManNotAvailable(_ cameraMan: SGCameraMan) {
+    func cameraManNotAvailable(_ cameraMan: SGCameraManual) {
         showNoCamera(true)
     }
     
-    func cameraManLibraryNotAvailable(_ cameraMan: SGCameraMan) {
+    func cameraManLibraryNotAvailable(_ cameraMan: SGCameraManual) {
+        // error if user did not give permission for library
     }
     
-    func cameraManDidStart(_ cameraMan: SGCameraMan) {
+    func cameraManDidStart(_ cameraMan: SGCameraManual) {
         setupPreviewLayer()
     }
     
-    func cameraManShareVideo(_ url: URL, assetId: String) {
-        delegate?.shareVideo(url, assetId: assetId)
+    func cameraManShareVideo(_ url: URL) {
+        delegate?.sGCameraViewDidShare(url)
     }
 }

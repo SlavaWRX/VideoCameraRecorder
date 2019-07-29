@@ -17,13 +17,13 @@ enum FrameRates: Double {
 }
 
 protocol SGCameraManDelegate: class {
-    func cameraManNotAvailable(_ cameraMan: SGCameraMan)
-    func cameraManDidStart(_ cameraMan: SGCameraMan)
-    func cameraManLibraryNotAvailable(_ cameraMan: SGCameraMan)
-    func cameraManShareVideo(_ url: URL, assetId: String)
+    func cameraManNotAvailable(_ cameraMan: SGCameraManual)
+    func cameraManDidStart(_ cameraMan: SGCameraManual)
+    func cameraManLibraryNotAvailable(_ cameraMan: SGCameraManual)
+    func cameraManShareVideo(_ url: URL)
 }
 
-class SGCameraMan: NSObject {
+public class SGCameraManual: NSObject {
     weak var delegate: SGCameraManDelegate?
     
     let session = AVCaptureSession()
@@ -145,7 +145,7 @@ class SGCameraMan: NSObject {
         }
     }
     
-    fileprivate func start() {
+    public func start() {
         // Devices
         
         let newCameraPosition: AVCaptureDevice.Position = self.startOnFrontCamera ? .front : .back
@@ -217,37 +217,40 @@ class SGCameraMan: NSObject {
         AudioServicesPlaySystemSound(1118)
     }
     
-    func saveVideo(_ url: URL, completion: ((PHAsset?) -> Void)? = nil) {
-        var identifier: String?
-        PHPhotoLibrary.shared().performChanges({
-            guard let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url) else {
-                return
-            }
-            request.creationDate = Date()
-            identifier = request.placeholderForCreatedAsset?.localIdentifier
-        }, completionHandler: { (_, _) in
-            var asset: PHAsset?
-            if let identifier = identifier {
-                let assets = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
-                asset = assets.firstObject
-            }
-            
-            DispatchQueue.main.async {
-                completion?(asset)
-            }
-        })
+    func saveVideo(_ url: URL, completion: (() -> Void)? = nil) {
+        // FOR SAVING VIDEO TO LIBRARY
+//        var identifier: String?
+//        PHPhotoLibrary.shared().performChanges({
+//            guard let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url) else {
+//                return
+//            }
+//            request.creationDate = Date()
+//            identifier = request.placeholderForCreatedAsset?.localIdentifier
+//        }, completionHandler: { (_, _) in
+//            var asset: PHAsset?
+//            if let identifier = identifier {
+//                let assets = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
+//                asset = assets.firstObject
+//            }
+//
+//            DispatchQueue.main.async {
+//                completion?(asset)
+//            }
+//        })
+    }
+    
+    func deleteFileAt(_ fileURL: String) {
+        do {
+            try FileManager.default.removeItem(atPath: fileURL)
+        } catch {
+            // No-op
+        }
     }
 }
 
-extension SGCameraMan: AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        saveVideo(outputFileURL,
-                  completion: { [weak self] asset in
-                    guard let asset = asset else {
-                        return
-                    }
-                    self?.delegate?.cameraManShareVideo(outputFileURL, assetId: asset.localIdentifier)
-        })
+extension SGCameraManual: AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
+    public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        delegate?.cameraManShareVideo(outputFileURL)
     }
 }
 
