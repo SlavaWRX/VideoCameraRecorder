@@ -14,7 +14,6 @@ enum SegmentType {
     case view
 }
 
-
 class CameraViewController: UIViewController {
     
     @IBOutlet weak var segmentControll: UISegmentedControl!
@@ -24,18 +23,11 @@ class CameraViewController: UIViewController {
     
     private (set) var topSegmentControll: [SegmentType] = [.viewController, .view]
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraView.isHidden = true
         cameraView.delegate = self
         recordCameraButton.isHidden = true
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        
     }
 
     @IBAction func segmentControllDidTap(_ sender: Any) {
@@ -60,13 +52,7 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func recordCameraButtonTapped(_ sender: Any) {
-        if cameraView.isRecordingVideo {
-            cameraView.stopRecordVideo {
-                
-            }
-        } else {
-            cameraView.startRecordVideo()
-        }
+        cameraView.recordButtonTapped()
     }
 }
 

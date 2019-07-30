@@ -32,25 +32,7 @@ public class SGCameraView: UIView, SGCameraManDelegate {
         
         cameraMan.delegate = self
         cameraMan.setup(self.startOnFrontCamera)
-        backgroundColor = UIColor.red
-    }
- 
-    override public func layoutSubviews() {
-        super.layoutSubviews()
-        
-        
-    }
-    
-    public func shareVideo(shareUrl: URL, viewComtroller: UIViewController) {
-        let videoLink = NSURL(fileURLWithPath: shareUrl.absoluteString)
-        let objectsToShare = [videoLink]
-        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        viewComtroller.present(activityViewController, animated: true, completion: nil)
-        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-            let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
-            self.cameraMan.deleteFileAt(exportPath)
-            viewComtroller.dismiss(animated: true, completion: nil)
-        }
+        backgroundColor = UIColor.black
     }
     
     func setupPreviewLayer() {
@@ -61,7 +43,6 @@ public class SGCameraView: UIView, SGCameraManDelegate {
         layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         self.layer.insertSublayer(layer, at: 0)
-//        layer.frame = self.layer.frame
         layer.frame = self.layer.bounds
         self.clipsToBounds = true
         
@@ -70,6 +51,15 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     
     
     // MARK: - Camera actions
+    
+    public func recordButtonTapped() {
+        if isRecordingVideo {
+            stopRecordVideo {
+            }
+        } else {
+            startRecordVideo()
+        }
+    }
     
     public func startRecordVideo() {
         cameraMan.recordVideo()
@@ -83,6 +73,18 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     
     
     // MARK: - Private helpers
+    
+    public func shareVideo(shareUrl: URL, viewComtroller: UIViewController) {
+        let videoLink = NSURL(fileURLWithPath: shareUrl.absoluteString)
+        let objectsToShare = [videoLink]
+        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        viewComtroller.present(activityViewController, animated: true, completion: nil)
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+            let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
+            self.cameraMan.deleteFileAt(exportPath)
+            viewComtroller.dismiss(animated: true, completion: nil)
+        }
+    }
     
     func showNoCamera(_ show: Bool) {
         // error if user did not give permission for camera
