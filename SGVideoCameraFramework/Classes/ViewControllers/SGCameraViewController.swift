@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 public class SGCameraViewController: UIViewController {
-
+    
     @IBOutlet weak var cameraView: SGCameraView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var cameraButton: UIButton!
@@ -24,6 +24,7 @@ public class SGCameraViewController: UIViewController {
     
     public var recordingTime: Double?
     public var frameRate: Double?
+    
     
     // MARK: - Intance intialization
     
@@ -57,6 +58,7 @@ public class SGCameraViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    
     // MARK: - Private methods
     
     private func configureUI() {
@@ -65,7 +67,7 @@ public class SGCameraViewController: UIViewController {
         timerLabel.textColor = UIColor.white
     }
     
-    private func timerTick(){
+    private func timerTick() {
         seconds += 1
         
         if seconds == 60{
@@ -83,7 +85,7 @@ public class SGCameraViewController: UIViewController {
         timerLabel.text = timeNow
     }
     
-    private func  stopTimer() {
+    private func stopTimer() {
         timer?.invalidate()
     }
     
@@ -113,6 +115,8 @@ public class SGCameraViewController: UIViewController {
 
 extension SGCameraViewController: SGCameraViewDelegate {
     public func sGCameraViewDidCompleteRecord(_ url: URL) {
-        cameraView.helper.shareVideo(url, viewController: self)
+        SGHelper.shareVideo(url, viewController: self) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

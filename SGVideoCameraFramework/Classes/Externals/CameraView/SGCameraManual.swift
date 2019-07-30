@@ -19,7 +19,6 @@ enum FrameRates: Double {
 protocol SGCameraManDelegate: class {
     func cameraManNotAvailable(_ cameraMan: SGCameraManual)
     func cameraManDidStart(_ cameraMan: SGCameraManual)
-    func cameraManLibraryNotAvailable(_ cameraMan: SGCameraManual)
     func cameraManDidCompleteRecord(_ url: URL)
 }
 
@@ -27,15 +26,14 @@ public class SGCameraManual: NSObject {
     weak var delegate: SGCameraManDelegate?
     
     let session = AVCaptureSession()
-    let queue = DispatchQueue(label: "no.hyper.ImagePicker.Camera.SessionQueue")
-    
-    var backCamera: AVCaptureDeviceInput?
-    var frontCamera: AVCaptureDeviceInput?
+    private let queue = DispatchQueue(label: "no.hyper.ImagePicker.Camera.SessionQueue")
+    private var videoCompletion: ((PHAsset?) -> Void)?
+    private var backCamera: AVCaptureDeviceInput?
+    private var frontCamera: AVCaptureDeviceInput?
+    private var stillCameraCaptureOutput: AVCaptureVideoDataOutput?
     var stillVideoOutput: AVCaptureMovieFileOutput?
-    var stillCameraCaptureOutput: AVCaptureVideoDataOutput?
     
     var startOnFrontCamera: Bool = false
-    private var videoCompletion: ((PHAsset?) -> Void)?
     
     var recordingTime: Double? {
         didSet {
@@ -61,7 +59,7 @@ public class SGCameraManual: NSObject {
         checkPermission()
     }
     
-    func addInput(_ input: AVCaptureDeviceInput) {
+    private func addInput(_ input: AVCaptureDeviceInput) {
         if session.canAddInput(input) {
             session.addInput(input)
         }
@@ -70,7 +68,7 @@ public class SGCameraManual: NSObject {
     
     // MARK: - Permission
     
-    func checkPermission() {
+    private func checkPermission() {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         
         switch status {
@@ -81,19 +79,9 @@ public class SGCameraManual: NSObject {
         default:
             delegate?.cameraManNotAvailable(self)
         }
-        
-        let libraryStatus = PHPhotoLibrary.authorizationStatus()
-        switch libraryStatus {
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { _ in }
-        case .denied:
-            delegate?.cameraManLibraryNotAvailable(self)
-        default:
-            break
-        }
     }
     
-    func requestPermission() {
+    private func requestPermission() {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
             DispatchQueue.main.async {
                 if granted {
@@ -108,11 +96,11 @@ public class SGCameraManual: NSObject {
     
     // MARK: - Session
     
-    var currentInput: AVCaptureDeviceInput? {
+    private var currentInput: AVCaptureDeviceInput? {
         return session.inputs.first as? AVCaptureDeviceInput
     }
     
-    func camera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+    private func camera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         let captureDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(
             deviceTypes: [.builtInWideAngleCamera],
             mediaType: .video,
@@ -189,7 +177,7 @@ public class SGCameraManual: NSObject {
         }
     }
     
-    func stop() {
+    private func stop() {
         self.session.stopRunning()
     }
     

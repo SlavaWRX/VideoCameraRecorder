@@ -15,12 +15,11 @@ public protocol SGCameraViewDelegate: class {
 
 public class SGCameraView: UIView, SGCameraManDelegate {
     
-    public let cameraMan = SGCameraManual()
-    public let helper = SGHelper()
+    private var previewLayer: AVCaptureVideoPreviewLayer?
+    private var startOnFrontCamera: Bool = false
     
-    var previewLayer: AVCaptureVideoPreviewLayer?
+    public let cameraMan = SGCameraManual()
     public weak var delegate: SGCameraViewDelegate?
-    var startOnFrontCamera: Bool = false
     public var isRecordingVideo: Bool {
         return cameraMan.stillVideoOutput?.isRecording ?? false
     }
@@ -39,11 +38,10 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        
         previewLayer?.frame = self.layer.bounds
     }
     
-    func setupPreviewLayer() {
+    private func setupPreviewLayer() {
         let layer = AVCaptureVideoPreviewLayer(session: cameraMan.session)
         
         layer.backgroundColor = UIColor.black.cgColor
@@ -80,18 +78,15 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     
     // MARK: - Private helpers
     
-    func showNoCamera(_ show: Bool) {
+    private func showNoCamera(_ show: Bool) {
         // error if user did not give permission for camera
     }
     
     
-    // CameraManDelegate
+    // MARK: - CameraManDelegate
+    
     func cameraManNotAvailable(_ cameraMan: SGCameraManual) {
         showNoCamera(true)
-    }
-    
-    func cameraManLibraryNotAvailable(_ cameraMan: SGCameraManual) {
-        // error if user did not give permission for library
     }
     
     func cameraManDidStart(_ cameraMan: SGCameraManual) {

@@ -10,19 +10,19 @@ import Foundation
 
 public class SGHelper {
     
-    public func shareVideo(_ url: URL, viewController: UIViewController) {
+    public static func shareVideo(_ url: URL, viewController: UIViewController, completion: @escaping () -> Void) {
         let videoLink = NSURL(fileURLWithPath: url.absoluteString)
         let objectsToShare = [videoLink]
         let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         viewController.present(activityViewController, animated: true, completion: nil)
         activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
             let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
-            self.deleteFileAt(exportPath)
-            viewController.dismiss(animated: true, completion: nil)
+            deleteFileAt(exportPath)
+            completion()
         }
     }
     
-    func deleteFileAt(_ fileURL: String) {
+    static func deleteFileAt(_ fileURL: String) {
         do {
             try FileManager.default.removeItem(atPath: fileURL)
         } catch {

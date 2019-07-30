@@ -35,7 +35,7 @@ class CameraViewController: UIViewController {
     
     
     // MARK: - Action methods
-
+    
     @IBAction func segmentControllDidTap(_ sender: Any) {
         let type = topSegmentControll[segmentControll.selectedSegmentIndex]
         switch type {
@@ -64,7 +64,9 @@ class CameraViewController: UIViewController {
 
 extension CameraViewController: SGCameraViewDelegate {
     func sGCameraViewDidCompleteRecord(_ videoUrl: URL) {
-        cameraView.helper.shareVideo(videoUrl, viewController: self)
+        SGHelper.shareVideo(videoUrl, viewController: self) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
