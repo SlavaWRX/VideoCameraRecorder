@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-protocol SGCameraViewDelegate: class {
+public protocol SGCameraViewDelegate: class {
     func sGCameraViewDidShare(_ videoUrl: URL)
 }
 
@@ -18,9 +18,9 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     public let cameraMan = SGCameraManual()
     
     var previewLayer: AVCaptureVideoPreviewLayer?
-    weak var delegate: SGCameraViewDelegate?
+    public weak var delegate: SGCameraViewDelegate?
     var startOnFrontCamera: Bool = false
-    var isRecordingVideo: Bool {
+    public var isRecordingVideo: Bool {
         return cameraMan.stillVideoOutput?.isRecording ?? false
     }
     
@@ -32,14 +32,25 @@ public class SGCameraView: UIView, SGCameraManDelegate {
         
         cameraMan.delegate = self
         cameraMan.setup(self.startOnFrontCamera)
-        backgroundColor = UIColor.black
+        backgroundColor = UIColor.red
     }
-    
+ 
     override public func layoutSubviews() {
         super.layoutSubviews()
         
         
-        previewLayer?.connection?.videoOrientation = .portrait
+    }
+    
+    public func shareVideo(shareUrl: URL, viewComtroller: UIViewController) {
+        let videoLink = NSURL(fileURLWithPath: shareUrl.absoluteString)
+        let objectsToShare = [videoLink]
+        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        viewComtroller.present(activityViewController, animated: true, completion: nil)
+        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
+            let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
+            self.cameraMan.deleteFileAt(exportPath)
+            viewComtroller.dismiss(animated: true, completion: nil)
+        }
     }
     
     func setupPreviewLayer() {
@@ -50,7 +61,8 @@ public class SGCameraView: UIView, SGCameraManDelegate {
         layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         self.layer.insertSublayer(layer, at: 0)
-        layer.frame = self.layer.frame
+//        layer.frame = self.layer.frame
+        layer.frame = self.layer.bounds
         self.clipsToBounds = true
         
         previewLayer = layer
@@ -59,11 +71,11 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     
     // MARK: - Camera actions
     
-    func startRecordVideo() {
+    public func startRecordVideo() {
         cameraMan.recordVideo()
     }
     
-    func stopRecordVideo(_ completion: @escaping () -> Void) {
+    public func stopRecordVideo(_ completion: @escaping () -> Void) {
         cameraMan.stopVideoRecordingAndSaveToLibrary { _ in
             completion()
         }

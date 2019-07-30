@@ -24,6 +24,30 @@
                                     <action selector="openCameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fxB-sK-tym"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECL-XH-dJ1" customClass="SGCameraView" customModule="SGVideoCameraFramework">
+                                <rect key="frame" x="0.0" y="72" width="414" height="824"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLi-2Y-fjN">
+                                        <rect key="frame" x="182" y="750" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="SeW-gt-4Os"/>
+                                            <constraint firstAttribute="width" constant="50" id="nUf-iI-Ove"/>
+                                        </constraints>
+                                        <state key="normal" image="cameraButtonIcon">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="recordCameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JYa-tH-WlP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="gLi-2Y-fjN" secondAttribute="bottom" constant="24" id="3Rf-8c-UG0"/>
+                                    <constraint firstItem="gLi-2Y-fjN" firstAttribute="centerX" secondItem="ECL-XH-dJ1" secondAttribute="centerX" id="Ppg-G5-FRX"/>
+                                </constraints>
+                            </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="y8q-iV-yQ5">
                                 <rect key="frame" x="0.0" y="44" width="414" height="29"/>
                                 <segments>
@@ -34,18 +58,14 @@
                                     <action selector="segmentControllDidTap:" destination="BYZ-38-t0r" eventType="valueChanged" id="AV3-WV-eHq"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECL-XH-dJ1" customClass="SGCameraView" customModule="SGVideoCameraFramework">
-                                <rect key="frame" x="0.0" y="72" width="414" height="824"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ECL-XH-dJ1" firstAttribute="top" secondItem="y8q-iV-yQ5" secondAttribute="bottom" id="36Z-js-lDR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="y8q-iV-yQ5" secondAttribute="trailing" id="4dG-76-Bhe"/>
                             <constraint firstItem="ECL-XH-dJ1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BTu-Rx-6wx"/>
                             <constraint firstItem="hGL-qo-lXh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Daf-2g-Ge3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ECL-XH-dJ1" secondAttribute="trailing" id="JRv-VO-nKy"/>
+                            <constraint firstItem="ECL-XH-dJ1" firstAttribute="top" secondItem="y8q-iV-yQ5" secondAttribute="bottom" id="OUk-2P-Xz6"/>
                             <constraint firstAttribute="bottom" secondItem="ECL-XH-dJ1" secondAttribute="bottom" id="k4l-aY-d6L"/>
                             <constraint firstItem="y8q-iV-yQ5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nP1-lk-QBB"/>
                             <constraint firstItem="y8q-iV-yQ5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xxV-di-hiV"/>
@@ -56,6 +76,7 @@
                     <connections>
                         <outlet property="cameraView" destination="ECL-XH-dJ1" id="FtP-v2-RcZ"/>
                         <outlet property="openCameraButton" destination="hGL-qo-lXh" id="q1U-Pa-C1w"/>
+                        <outlet property="recordCameraButton" destination="gLi-2Y-fjN" id="qEx-zt-CSM"/>
                         <outlet property="segmentControll" destination="y8q-iV-yQ5" id="zAU-P2-GZL"/>
                     </connections>
                 </viewController>
@@ -64,4 +85,7 @@
             <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cameraButtonIcon" width="135" height="135"/>
+    </resources>
 </document>

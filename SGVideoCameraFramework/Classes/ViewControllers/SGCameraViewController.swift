@@ -109,23 +109,10 @@ public class SGCameraViewController: UIViewController {
             startRecordingTime()
         }
     }
-    
-    private func shareVideo(shareUrl: URL) {
-        let videoLink = NSURL(fileURLWithPath: shareUrl.absoluteString)
-        let objectsToShare = [videoLink]
-        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        present(activityViewController, animated: true, completion: nil)
-        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-            let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
-            self.cameraView.cameraMan.deleteFileAt(exportPath)
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
 }
 
 extension SGCameraViewController: SGCameraViewDelegate {
-    func sGCameraViewDidShare(_ url: URL) {
-        shareVideo(shareUrl: url)
+    public func sGCameraViewDidShare(_ url: URL) {
+        cameraView.shareVideo(shareUrl: url, viewComtroller: self)
     }
 }

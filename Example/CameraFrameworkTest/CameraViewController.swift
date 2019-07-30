@@ -20,6 +20,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var segmentControll: UISegmentedControl!
     @IBOutlet weak var openCameraButton: UIButton!
     @IBOutlet weak var cameraView: SGCameraView!
+    @IBOutlet weak var recordCameraButton: UIButton!
     
     private (set) var topSegmentControll: [SegmentType] = [.viewController, .view]
     
@@ -27,6 +28,14 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraView.isHidden = true
+        cameraView.delegate = self
+        recordCameraButton.isHidden = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        
     }
 
     @IBAction func segmentControllDidTap(_ sender: Any) {
@@ -35,9 +44,11 @@ class CameraViewController: UIViewController {
         case .viewController:
             openCameraButton.isHidden = false
             cameraView.isHidden = true
+            recordCameraButton.isHidden = true
         case .view:
             openCameraButton.isHidden = true
             cameraView.isHidden = false
+            recordCameraButton.isHidden = false
         }
     }
     
@@ -48,7 +59,20 @@ class CameraViewController: UIViewController {
         present(sgCameraView, animated: true, completion: nil)
     }
     
-    
-    
+    @IBAction func recordCameraButtonTapped(_ sender: Any) {
+        if cameraView.isRecordingVideo {
+            cameraView.stopRecordVideo {
+                
+            }
+        } else {
+            cameraView.startRecordVideo()
+        }
+    }
+}
+
+extension CameraViewController: SGCameraViewDelegate {
+    func sGCameraViewDidShare(_ videoUrl: URL) {
+        cameraView.shareVideo(shareUrl: videoUrl, viewComtroller: self)
+    }
 }
 
