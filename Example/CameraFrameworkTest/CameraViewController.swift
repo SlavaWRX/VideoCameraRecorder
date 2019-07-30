@@ -23,12 +23,18 @@ class CameraViewController: UIViewController {
     
     private (set) var topSegmentControll: [SegmentType] = [.viewController, .view]
     
+    
+    //MARK: - Override mthods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraView.isHidden = true
         cameraView.delegate = self
         recordCameraButton.isHidden = true
     }
+    
+    
+    // MARK: - Action methods
 
     @IBAction func segmentControllDidTap(_ sender: Any) {
         let type = topSegmentControll[segmentControll.selectedSegmentIndex]
@@ -57,8 +63,8 @@ class CameraViewController: UIViewController {
 }
 
 extension CameraViewController: SGCameraViewDelegate {
-    func sGCameraViewDidShare(_ videoUrl: URL) {
-        cameraView.shareVideo(shareUrl: videoUrl, viewComtroller: self)
+    func sGCameraViewDidCompleteRecord(_ videoUrl: URL) {
+        cameraView.helper.shareVideo(videoUrl, viewController: self)
     }
 }
 

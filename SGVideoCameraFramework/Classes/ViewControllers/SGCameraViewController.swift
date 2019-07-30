@@ -112,7 +112,7 @@ public class SGCameraViewController: UIViewController {
 }
 
 extension SGCameraViewController: SGCameraViewDelegate {
-    public func sGCameraViewDidShare(_ url: URL) {
-        cameraView.shareVideo(shareUrl: url, viewComtroller: self)
+    public func sGCameraViewDidCompleteRecord(_ url: URL) {
+        cameraView.helper.shareVideo(url, viewController: self)
     }
 }

@@ -20,7 +20,7 @@ protocol SGCameraManDelegate: class {
     func cameraManNotAvailable(_ cameraMan: SGCameraManual)
     func cameraManDidStart(_ cameraMan: SGCameraManual)
     func cameraManLibraryNotAvailable(_ cameraMan: SGCameraManual)
-    func cameraManShareVideo(_ url: URL)
+    func cameraManDidCompleteRecord(_ url: URL)
 }
 
 public class SGCameraManual: NSObject {
@@ -207,50 +207,19 @@ public class SGCameraManual: NSObject {
         AudioServicesPlaySystemSound(1117)
     }
     
-    func stopVideoRecordingAndSaveToLibrary(_ completion: ((PHAsset?) -> Void)? = nil) {
+    func stopVideoRecording() {
         guard let stillVideoOutput = stillVideoOutput,
             stillVideoOutput.isRecording else {
                 return
         }
         stillVideoOutput.stopRecording()
-        videoCompletion = completion
         AudioServicesPlaySystemSound(1118)
-    }
-    
-    func saveVideo(_ url: URL, completion: (() -> Void)? = nil) {
-        // FOR SAVING VIDEO TO LIBRARY
-//        var identifier: String?
-//        PHPhotoLibrary.shared().performChanges({
-//            guard let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url) else {
-//                return
-//            }
-//            request.creationDate = Date()
-//            identifier = request.placeholderForCreatedAsset?.localIdentifier
-//        }, completionHandler: { (_, _) in
-//            var asset: PHAsset?
-//            if let identifier = identifier {
-//                let assets = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
-//                asset = assets.firstObject
-//            }
-//
-//            DispatchQueue.main.async {
-//                completion?(asset)
-//            }
-//        })
-    }
-    
-    func deleteFileAt(_ fileURL: String) {
-        do {
-            try FileManager.default.removeItem(atPath: fileURL)
-        } catch {
-            // No-op
-        }
     }
 }
 
 extension SGCameraManual: AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
     public func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        delegate?.cameraManShareVideo(outputFileURL)
+        delegate?.cameraManDidCompleteRecord(outputFileURL)
     }
 }
 

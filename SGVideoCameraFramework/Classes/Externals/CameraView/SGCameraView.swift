@@ -10,12 +10,13 @@ import Foundation
 import Photos
 
 public protocol SGCameraViewDelegate: class {
-    func sGCameraViewDidShare(_ videoUrl: URL)
+    func sGCameraViewDidCompleteRecord(_ videoUrl: URL)
 }
 
 public class SGCameraView: UIView, SGCameraManDelegate {
     
     public let cameraMan = SGCameraManual()
+    public let helper = SGHelper()
     
     var previewLayer: AVCaptureVideoPreviewLayer?
     public weak var delegate: SGCameraViewDelegate?
@@ -33,6 +34,13 @@ public class SGCameraView: UIView, SGCameraManDelegate {
         cameraMan.delegate = self
         cameraMan.setup(self.startOnFrontCamera)
         backgroundColor = UIColor.black
+    }
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+        previewLayer?.frame = self.layer.bounds
     }
     
     func setupPreviewLayer() {
@@ -66,25 +74,11 @@ public class SGCameraView: UIView, SGCameraManDelegate {
     }
     
     public func stopRecordVideo(_ completion: @escaping () -> Void) {
-        cameraMan.stopVideoRecordingAndSaveToLibrary { _ in
-            completion()
-        }
+        cameraMan.stopVideoRecording()
     }
     
     
     // MARK: - Private helpers
-    
-    public func shareVideo(shareUrl: URL, viewComtroller: UIViewController) {
-        let videoLink = NSURL(fileURLWithPath: shareUrl.absoluteString)
-        let objectsToShare = [videoLink]
-        let activityViewController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-        viewComtroller.present(activityViewController, animated: true, completion: nil)
-        activityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-            let exportPath = NSTemporaryDirectory().appendingFormat("tmp.mov")
-            self.cameraMan.deleteFileAt(exportPath)
-            viewComtroller.dismiss(animated: true, completion: nil)
-        }
-    }
     
     func showNoCamera(_ show: Bool) {
         // error if user did not give permission for camera
@@ -104,7 +98,7 @@ public class SGCameraView: UIView, SGCameraManDelegate {
         setupPreviewLayer()
     }
     
-    func cameraManShareVideo(_ url: URL) {
-        delegate?.sGCameraViewDidShare(url)
+    func cameraManDidCompleteRecord(_ url: URL) {
+        delegate?.sGCameraViewDidCompleteRecord(url)
     }
 }

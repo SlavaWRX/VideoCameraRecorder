@@ -13,6 +13,7 @@
 		F916924D22EACBEC00FE2D45 /* SGCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F916924B22EACBEC00FE2D45 /* SGCameraViewController.swift */; };
 		F916924E22EACBEC00FE2D45 /* SGCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F916924C22EACBEC00FE2D45 /* SGCameraViewController.xib */; };
 		F916925922EAD5B300FE2D45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F916925822EAD5B200FE2D45 /* Assets.xcassets */; };
+		F96BB56722F09E82005FDA05 /* SGHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96BB56622F09E82005FDA05 /* SGHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F916924B22EACBEC00FE2D45 /* SGCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SGCameraViewController.swift; sourceTree = "<group>"; };
 		F916924C22EACBEC00FE2D45 /* SGCameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SGCameraViewController.xib; sourceTree = "<group>"; };
 		F916925822EAD5B200FE2D45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F96BB56622F09E82005FDA05 /* SGHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SGHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		F916924422EACAF900FE2D45 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				F96BB56522F09E61005FDA05 /* Source */,
 				F916924522EACB0000FE2D45 /* CameraView */,
 			);
 			path = Externals;
@@ -97,6 +100,14 @@
 				F916924C22EACBEC00FE2D45 /* SGCameraViewController.xib */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F96BB56522F09E61005FDA05 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F96BB56622F09E82005FDA05 /* SGHelper.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 				F916924722EACB2C00FE2D45 /* SGCameraManual.swift in Sources */,
 				F916924922EACB7400FE2D45 /* SGCameraView.swift in Sources */,
 				F916924D22EACBEC00FE2D45 /* SGCameraViewController.swift in Sources */,
+				F96BB56722F09E82005FDA05 /* SGHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
